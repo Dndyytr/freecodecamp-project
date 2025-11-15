@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Technical Documentation Page</title>
+  </head>
+  <body>
+    <nav id="navbar">
+      <header>React Documentation</header>
+      <ul>
+        <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+        <li>
+          <a class="nav-link" href="#JSX">JSX</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Components">Components</a>
+        </li>
+        <li><a class="nav-link" href="#Props">Props</a></li>
+        <li><a class="nav-link" href="#State">State</a></li>
+        <li>
+          <a class="nav-link" href="#Hooks">Hooks</a>
+        </li>
+        <li><a class="nav-link" href="#Event_Handling">Event Handling</a></li>
+        <li>
+          <a class="nav-link" href="#Conditional_Rendering">Conditional Rendering</a>
+        </li>
+        <li><a class="nav-link" href="#Lists_and_Keys">Lists and Keys</a></li>
+        <li><a class="nav-link" href="#Forms">Forms</a></li>
+        <li>
+          <a class="nav-link" href="#Lifting_State_Up">Lifting State Up</a>
+        </li>
+        <li><a class="nav-link" href="#Context_API">Context API</a></li>
+        <li>
+          <a class="nav-link" href="#React_Router">React Router</a>
+        </li>
+        <li><a class="nav-link" href="#Reference">Reference</a></li>
+      </ul>
+    </nav>
+    <main id="main-doc">
+      <section class="main-section" id="Introduction">
+        <header>Introduction</header>
+        <article>
+          <p>
+            React is an open-source JavaScript library for building user interfaces based on components. It is maintained by Meta (formerly Facebook) and a community of individual developers and companies.
+          </p>
+
+          <p>
+            React allows developers to create large web applications that can change data without reloading the page. Its main purpose is to be fast, scalable, and simple. It works only on the user interface in an application; that is, the view in the Model-View-Controller (MVC) pattern. It can be used in combination with other JavaScript libraries or frameworks, such as AngularJS in the MVC pattern.
+          </p>
+          <ul>
+            <li>
+              React uses a declarative paradigm that makes it easier to reason about your application and aims to be both efficient and flexible.
+            </li>
+            <li>
+              It designs simple views for each state in your application, and React will efficiently update and render just the right components when your data changes. Declarative views make your code more predictable and easier to debug.
+            </li>
+            <li>
+              React uses a virtual DOM (Document Object Model), which is a representation of the real DOM. When the state of an object changes, virtual DOM updates only that object in real DOM, rather than updating all the objects. This makes React applications faster and more efficient.
+            </li>
+            <li>
+              React follows the concept of reusable components. Components are independent and reusable bits of code that serve as the foundation of React applications. They work similarly to JavaScript functions but return HTML through a render() function.
+            </li>
+          </ul>
+        </article>
+      </section>
+      <section class="main-section" id="JSX">
+        <header>JSX</header>
+        <article>
+          <p>
+            JSX stands for JavaScript XML. It is a syntax extension to JavaScript that allows you to write HTML-like code in your JavaScript files.
+          </p>
+
+          <p>
+            JSX makes it easier to write and add HTML in React. While it's not required to use JSX in React, it is recommended because it makes the code more readable and easier to write.
+          </p>
+          <p>Example:</p>
+          <code>const element = <h1>Hello, world!</h1>;</code>
+          <p>
+            Under the hood, JSX gets compiled to React.createElement() calls. The above example is equivalent to:
+          </p>
+          <code>const element = React.createElement('h1', {}, 'Hello, world!');</code>
+          <p>
+            JSX also allows you to embed expressions within curly braces:
+          </p>
+          <code>const name = 'React'; const element = <h1>Hello, {name}</h1>;</code>
+          <p>
+            Note that you cannot use if statements inside JSX, but you can use conditional expressions:
+          </p>
+          <code>const element = <div>{isLoggedIn ? <LogoutButton /> : <LoginButton />}</div>;</code>
+        </article>
+      </section>
+      <section class="main-section" id="Components">
+        <header>Components</header>
+        <article>
+          <p>
+            Components are the building blocks of React applications. They let you split the UI into independent, reusable pieces, and think about each piece in isolation.
+          </p>
+
+          <p>
+            React components can be defined in two main ways:
+          </p>
+          <ul>
+            <li>
+              <strong>Functional Components:</strong> Simple JavaScript functions that accept props as an argument and return React elements.
+              <code>
+                function Welcome(props) {<br/>
+                  &nbsp;&nbsp;return <h1>Hello, {props.name}</h1>;<br/>
+                }
+              </code>
+            </li>
+            <li>
+              <strong>Class Components:</strong> ES6 classes that extend React.Component and have a render() method.
+              <code>
+                class Welcome extends React.Component {<br/>
+                  &nbsp;&nbsp;render() {<br/>
+                  &nbsp;&nbsp;&nbsp;&nbsp;return <h1>Hello, {this.props.name}</h1>;<br/>
+                  &nbsp;&nbsp;}<br/>
+                }
+              </code>
+            </li>
+          </ul>
+          <p>
+            Note: With the introduction of React Hooks, functional components can now handle state and lifecycle methods, making them the preferred way to define components in modern React applications.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="Props">
+        <header>Props</header>
+        <article>
+          <p>
+            Props (short for "properties") are read-only inputs to a React component. They are how components talk to each other.
+          </p>
+
+          <p>
+            Props are passed to components via HTML attributes:
+          </p>
+          <code>
+            <Welcome name="Sara" />
+          </code>
+          <p>
+            Inside the component, props are accessible as an object:
+          </p>
+          <code>
+            function Welcome(props) {<br/>
+              &nbsp;&nbsp;return <h1>Hello, {props.name}</h1>;<br/>
+            }
+          </code>
+          <p>
+            Props have two important characteristics:
+          </p>
+          <ul>
+            <li>
+              <strong>Immutable:</strong> Components should never modify their own props. Think of props as read-only.
+            </li>
+            <li>
+              <strong>Top-down flow:</strong> Props flow from parent components to child components.
+            </li>
+          </ul>
+          <p>
+            You can also define default props for when a prop is not provided:
+          </p>
+          <code>
+            Welcome.defaultProps = {<br/>
+              &nbsp;&nbsp;name: 'Guest'<br/>
+            };
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="State">
+        <header>State</header>
+        <article>
+          <p>
+            State is data that changes over time, usually in response to user events. Unlike props, state is private and fully controlled by the component.
+          </p>
+
+          <p>
+            In class components, state is defined in the constructor:
+          </p>
+          <code>
+            class Counter extends React.Component {<br/>
+              &nbsp;&nbsp;constructor(props) {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;super(props);<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;this.state = {count: 0};<br/>
+              &nbsp;&nbsp;}<br/>
+              &nbsp;&nbsp;// ...<br/>
+            }
+          </code>
+          <p>
+            In functional components, state is managed using the useState hook:
+          </p>
+          <code>
+            function Counter() {<br/>
+              &nbsp;&nbsp;const [count, setCount] = useState(0);<br/>
+              &nbsp;&nbsp;// ...<br/>
+            }
+          </code>
+          <p>
+            To update state, you should never modify it directly. Instead, use the state updater function:
+          </p>
+          <code>
+            // Class component<br/>
+            this.setState({count: this.state.count + 1});<br/>
+            <br/>
+            // Functional component<br/>
+            setCount(count + 1);
+          </code>
+          <p>
+            State updates may be asynchronous, so when the update depends on the previous state, use a function:
+          </p>
+          <code>
+            setCount(prevCount => prevCount + 1);
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Hooks">
+        <header>Hooks</header>
+        <article>
+          <p>
+            Hooks are functions that let you "hook into" React state and lifecycle features from functional components. They don't work inside classes.
+          </p>
+
+          <p>
+            The most commonly used hooks are:
+          </p>
+          <ul>
+            <li>
+              <strong>useState:</strong> Allows you to add state to functional components.
+              <code>
+                const [count, setCount] = useState(0);
+              </code>
+            </li>
+            <li>
+              <strong>useEffect:</strong> Performs side effects in functional components (like data fetching, subscriptions, or manually changing the DOM).
+              <code>
+                useEffect(() => {<br/>
+                  &nbsp;&nbsp;// Effect code here<br/>
+                  &nbsp;&nbsp;return () => {<br/>
+                  &nbsp;&nbsp;&nbsp;&nbsp;// Cleanup code here<br/>
+                  &nbsp;&nbsp;};<br/>
+                }, [dependencies]);
+              </code>
+            </li>
+            <li>
+              <strong>useContext:</strong> Accesses the value of a React context.
+              <code>
+                const value = useContext(MyContext);
+              </code>
+            </li>
+            <li>
+              <strong>useReducer:</strong> An alternative to useState for more complex state logic.
+              <code>
+                const [state, dispatch] = useReducer(reducer, initialState);
+              </code>
+            </li>
+          </ul>
+          <p>
+            Rules of hooks:
+          </p>
+          <ul>
+            <li>Only call hooks at the top level (not inside loops, conditions, or nested functions)</li>
+            <li>Only call hooks from React functional components or custom hooks</li>
+          </ul>
+        </article>
+      </section>
+      <section class="main-section" id="Event_Handling">
+        <header>Event Handling</header>
+        <article>
+          <p>
+            Handling events with React elements is very similar to handling events on DOM elements, but with some syntax differences:
+          </p>
+          <ul>
+            <li>React events are named using camelCase, rather than lowercase.</li>
+            <li>With JSX, you pass a function as the event handler, rather than a string.</li>
+          </ul>
+          
+          <p>Example:</p>
+          <code>
+            // HTML<br/>
+            <button onclick="activateLasers()"><br/>
+              &nbsp;&nbsp;Activate Lasers<br/>
+            </button><br/>
+            <br/>
+            // React<br/>
+            <button onClick={activateLasers}><br/>
+              &nbsp;&nbsp;Activate Lasers<br/>
+            </button>
+          </code>
+          
+          <p>
+            You cannot return false to prevent default behavior in React. You must call preventDefault explicitly:
+          </p>
+          <code>
+            function Form() {<br/>
+              &nbsp;&nbsp;function handleSubmit(e) {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;e.preventDefault();<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;console.log('Submitting form...');<br/>
+              &nbsp;&nbsp;}<br/>
+            <br/>
+              &nbsp;&nbsp;return (<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;<form onSubmit={handleSubmit}><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit">Submit</button><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;</form><br/>
+              &nbsp;&nbsp;);<br/>
+            }
+          </code>
+          
+          <p>
+            When using class components, you often need to bind event handlers to 'this':
+          </p>
+          <code>
+            class Toggle extends React.Component {<br/>
+              &nbsp;&nbsp;constructor(props) {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;super(props);<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;this.state = {isToggleOn: true};<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;// Binding is necessary to make `this` work in the callback<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;this.handleClick = this.handleClick.bind(this);<br/>
+              &nbsp;&nbsp;}<br/>
+            <br/>
+              &nbsp;&nbsp;// ...<br/>
+            }
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Conditional_Rendering">
+        <header>Conditional Rendering</header>
+        <article>
+          <p>
+            In React, you can create distinct components that encapsulate behavior you need. Then you can render only some of them, depending on the state of your application.
+          </p>
+
+          <p>
+            React supports several ways to conditionally render elements:
+          </p>
+          
+          <h4>1. If/Else Statements</h4>
+          <code>
+            function Greeting(props) {<br/>
+              &nbsp;&nbsp;if (props.isLoggedIn) {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;return <UserGreeting />;<br/>
+              &nbsp;&nbsp;}<br/>
+              &nbsp;&nbsp;return <GuestGreeting />;<br/>
+            }
+          </code>
+          
+          <h4>2. Element Variables</h4>
+          <code>
+            function LoginControl(props) {<br/>
+              &nbsp;&nbsp;const [isLoggedIn, setIsLoggedIn] = useState(false);<br/>
+              &nbsp;&nbsp;let button;<br/>
+            <br/>
+              &nbsp;&nbsp;if (isLoggedIn) {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;button = <LogoutButton onClick={() => setIsLoggedIn(false)} />;<br/>
+              &nbsp;&nbsp;} else {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;button = <LoginButton onClick={() => setIsLoggedIn(true)} />;<br/>
+              &nbsp;&nbsp;}<br/>
+            <br/>
+              &nbsp;&nbsp;return (<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;<div><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Greeting isLoggedIn={isLoggedIn} /><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{button}<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;</div><br/>
+              &nbsp;&nbsp;);<br/>
+            }
+          </code>
+          
+          <h4>3. Inline If with Logical &amp;&amp; Operator</h4>
+          <code>
+            function Mailbox(props) {<br/>
+              &nbsp;&nbsp;return (<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;<div><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{props.unreadMessages.length > 0 &&<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h2><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have {props.unreadMessages.length} unread messages.<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;</div><br/>
+              &nbsp;&nbsp;);<br/>
+            }
+          </code>
+          
+          <h4>4. Inline If-Else with Conditional Operator</h4>
+          <code>
+            const button = isLoggedIn ? (<br/>
+              &nbsp;&nbsp;<LogoutButton onClick={handleLogout} /><br/>
+            ) : (<br/>
+              &nbsp;&nbsp;<LoginButton onClick={handleLogin} /><br/>
+            );
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Lists_and_Keys">
+        <header>Lists and Keys</header>
+        <article>
+          <p>
+            Rendering lists of elements is a common pattern in React. You can transform arrays into lists of elements using the map() function.
+          </p>
+          
+          <code>
+            const numbers = [1, 2, 3, 4, 5];<br/>
+            const listItems = numbers.map((number) =><br/>
+              &nbsp;&nbsp;<li key={number.toString()}><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;{number}<br/>
+              &nbsp;&nbsp;</li><br/>
+            );
+          </code>
+          
+          <p>
+            When rendering a list, each item needs a "key" prop. Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array:
+          </p>
+          
+          <code>
+            function NumberList(props) {<br/>
+              &nbsp;&nbsp;const numbers = props.numbers;<br/>
+              &nbsp;&nbsp;const listItems = numbers.map((number) =><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;<li key={number.toString()}><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{number}<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;</li><br/>
+              &nbsp;&nbsp;);<br/>
+              &nbsp;&nbsp;return <ul>{listItems}</ul>;<br/>
+            }
+          </code>
+          
+          <p>
+            The best way to choose a key is to use a string that uniquely identifies a list item among its siblings. Most often you would use IDs from your data:
+          </p>
+          
+          <code>
+            const todoItems = todos.map((todo) =><br/>
+              &nbsp;&nbsp;<li key={todo.id}><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;{todo.text}<br/>
+              &nbsp;&nbsp;</li><br/>
+            );
+          </code>
+          
+          <p>
+            Keys serve as a hint to React but don't get passed to your components. If you need the same value in your component, pass it explicitly as a prop with a different name:
+          </p>
+          
+          <code>
+            const content = posts.map((post) =><br/>
+              &nbsp;&nbsp;<Post<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;key={post.id}<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;id={post.id}<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;title={post.title} <br/>
+              &nbsp;&nbsp;/><br/>
+            );
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Forms">
+        <header>Forms</header>
+        <article>
+          <p>
+            HTML form elements work differently from other DOM elements in React because form elements naturally keep some internal state. React implements a technique called "controlled components" to handle form inputs.
+          </p>
+          
+          <h4>Controlled Components</h4>
+          <p>
+            In HTML, form elements typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with setState().
+          </p>
+          
+          <code>
+            function NameForm() {<br/>
+              &nbsp;&nbsp;const [value, setValue] = useState('');<br/>
+            <br/>
+              &nbsp;&nbsp;const handleChange = (e) => {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;setValue(e.target.value);<br/>
+              &nbsp;&nbsp;};<br/>
+            <br/>
+              &nbsp;&nbsp;const handleSubmit = (e) => {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;alert('A name was submitted: ' + value);<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;e.preventDefault();<br/>
+              &nbsp;&nbsp;};<br/>
+            <br/>
+              &nbsp;&nbsp;return (<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;<form onSubmit={handleSubmit}><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name:<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value={value} onChange={handleChange} /><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" /><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;</form><br/>
+              &nbsp;&nbsp;);<br/>
+            }
+          </code>
+          
+          <p>
+            With a controlled component, the input's value is always driven by the React state. While this means you have to type a bit more code, you now have direct control over the input elements and their data.
+          </p>
+          
+          <h4>Handling Multiple Inputs</h4>
+          <p>
+            When you need to handle multiple controlled input elements, you can add a name attribute to each element and let the handler function choose what to do based on the value of event.target.name:
+          </p>
+          
+          <code>
+            function Reservation() {<br/>
+              &nbsp;&nbsp;const [formState, setFormState] = useState({<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;isGoing: true,<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;numberOfGuests: 2<br/>
+              &nbsp;&nbsp;});<br/>
+            <br/>
+              &nbsp;&nbsp;const handleInputChange = (e) => {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;const target = e.target;<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;const value = target.name === 'isGoing' ? target.checked : target.value;<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;const name = target.name;<br/>
+            <br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;setFormState({<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...formState,<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[name]: value<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;});<br/>
+              &nbsp;&nbsp;};<br/>
+            <br/>
+              &nbsp;&nbsp;// ...<br/>
+            }
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Lifting_State_Up">
+        <header>Lifting State Up</header>
+        <article>
+          <p>
+            Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.
+          </p>
+          
+          <p>
+            Let's say we have two components that need to stay in sync - a temperature input and a boiling verdict:
+          </p>
+          
+          <code>
+            function BoilingVerdict(props) {<br/>
+              &nbsp;&nbsp;if (props.celsius >= 100) {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;return <p>The water would boil.</p>;<br/>
+              &nbsp;&nbsp;}<br/>
+              &nbsp;&nbsp;return <p>The water would not boil.</p>;<br/>
+            }
+          </code>
+          
+          <p>
+            We can create a parent component that manages the shared state and passes it down to both children:
+          </p>
+          
+          <code>
+            class Calculator extends React.Component {<br/>
+              &nbsp;&nbsp;constructor(props) {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;super(props);<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;this.state = {temperature: ''};<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;this.handleTemperatureChange = this.handleTemperatureChange.bind(this);<br/>
+              &nbsp;&nbsp;}<br/>
+            <br/>
+              &nbsp;&nbsp;handleTemperatureChange(temperature) {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;this.setState({temperature});<br/>
+              &nbsp;&nbsp;}<br/>
+            <br/>
+              &nbsp;&nbsp;render() {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;const temperature = this.state.temperature;<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;return (<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fieldset><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<legend>Enter temperature in Celsius:</legend><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<TemperatureInput<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;temperature={temperature}<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onTemperatureChange={this.handleTemperatureChange} /><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BoilingVerdict<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;celsius={parseFloat(temperature)} /><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</fieldset><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;);<br/>
+              &nbsp;&nbsp;}<br/>
+            }
+          </code>
+          
+          <p>
+            The key insight here is that any state that's considered "source of truth" for multiple components should be lifted up to their common ancestor. Instead of trying to sync state between different components, we rely on the top-down data flow.
+          </p>
+          
+          <p>
+            Lifting state up requires writing more "boilerplate" code than two-way binding approaches, but the benefit is that any bug is now localized to a specific component, making it easier to find and fix.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="Context_API">
+        <header>Context API</header>
+        <article>
+          <p>
+            Context provides a way to pass data through the component tree without having to pass props down manually at every level. It's designed to share data that can be considered "global" for a tree of React components.
+          </p>
+          
+          <h4>When to Use Context</h4>
+          <p>
+            Context is primarily used when some data needs to be accessible by many components at different nesting levels. Apply it sparingly because it makes component reuse more difficult.
+          </p>
+          
+          <h4>Basic Usage</h4>
+          <code>
+            // 1. Create a context<br/>
+            const ThemeContext = React.createContext('light');<br/>
+            <br/>
+            // 2. Create a Provider component<br/>
+            class App extends React.Component {<br/>
+              &nbsp;&nbsp;render() {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;return (<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ThemeContext.Provider value="dark"><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Toolbar /><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ThemeContext.Provider><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;);<br/>
+              &nbsp;&nbsp;}<br/>
+            }<br/>
+            <br/>
+            // 3. Consume the context<br/>
+            function Toolbar(props) {<br/>
+              &nbsp;&nbsp;return (<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;<div><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ThemedButton /><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;</div><br/>
+              &nbsp;&nbsp;);<br/>
+            }<br/>
+            <br/>
+            class ThemedButton extends React.Component {<br/>
+              &nbsp;&nbsp;static contextType = ThemeContext;<br/>
+              &nbsp;&nbsp;render() {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;return <button theme={this.context}>I am {this.context} themed</button>;<br/>
+              &nbsp;&nbsp;}<br/>
+            }
+          </code>
+          
+          <h4>Using Context with Hooks</h4>
+          <p>
+            In functional components, you can use the useContext hook:
+          </p>
+          <code>
+            const value = useContext(MyContext);
+          </code>
+          
+          <p>Example:</p>
+          <code>
+            const ThemeButton = () => {<br/>
+              &nbsp;&nbsp;const theme = useContext(ThemeContext);<br/>
+              &nbsp;&nbsp;return <button className={theme}>I am styled by theme!</button>;<br/>
+            };
+          </code>
+          
+          <h4>Dynamic Context</h4>
+          <p>
+            You can also make context values dynamic by using state:
+          </p>
+          <code>
+            const ThemeContext = React.createContext();<br/>
+            <br/>
+            class ThemeProvider extends React.Component {<br/>
+              &nbsp;&nbsp;state = {theme: 'light'};<br/>
+            <br/>
+              &nbsp;&nbsp;toggleTheme = () => {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;this.setState(state => ({<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;theme: state.theme === 'light' ? 'dark' : 'light'<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;}));<br/>
+              &nbsp;&nbsp;};<br/>
+            <br/>
+              &nbsp;&nbsp;render() {<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;return (<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ThemeContext.Provider value={{<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;theme: this.state.theme,<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;toggleTheme: this.toggleTheme<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}}><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.props.children}<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ThemeContext.Provider><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;);<br/>
+              &nbsp;&nbsp;}<br/>
+            }
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="React_Router">
+        <header>React Router</header>
+        <article>
+          <p>
+            React Router is the standard routing library for React. It enables navigation between different components in a React application, allows changing the browser URL, and keeps the UI in sync with the URL.
+          </p>
+          
+          <h4>Basic Setup</h4>
+          <p>
+            First, install React Router:
+          </p>
+          <code>npm install react-router-dom</code>
+          
+          <p>
+            Then set up your routes:
+          </p>
+          <code>
+            import {<br/>
+              &nbsp;&nbsp;BrowserRouter as Router,<br/>
+              &nbsp;&nbsp;Switch,<br/>
+              &nbsp;&nbsp;Route,<br/>
+              &nbsp;&nbsp;Link<br/>
+            } from "react-router-dom";<br/>
+            <br/>
+            function App() {<br/>
+              &nbsp;&nbsp;return (<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;<Router><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<nav><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ul><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Link to="/">Home</Link><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Link to="/about">About</Link><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Link to="/users">Users</Link><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ul><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nav><br/>
+            <br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{/* A <Switch> looks through its children <Route>s and<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;renders the first one that matches the current URL */}<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Switch><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Route path="/about"><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<About /><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Route><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Route path="/users"><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Users /><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Route><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Route path="/"><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Home /><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Route><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Switch><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;</Router><br/>
+              &nbsp;&nbsp;);<br/>
+            }
+          </code>
+          
+          <h4>Route Parameters</h4>
+          <p>
+            You can define routes with parameters:
+          </p>
+          <code>
+            <Route path="/users/:id"><br/>
+              &nbsp;&nbsp;<User /><br/>
+            </Route>
+          </code>
+          
+          <p>
+            Access the parameters in your component:
+          </p>
+          <code>
+            function User() {<br/>
+              &nbsp;&nbsp;// Get the userId param from the URL.<br/>
+              &nbsp;&nbsp;let { id } = useParams();<br/>
+            <br/>
+              &nbsp;&nbsp;return <h2>User ID: {id}</h2>;<br/>
+            }
+          </code>
+          
+          <h4>Nested Routes</h4>
+          <p>
+            You can also create nested routes:
+          </p>
+          <code>
+            function Users() {<br/>
+              &nbsp;&nbsp;return (<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;<div><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h2>Users</h2><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Switch><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Route path={`${match.path}/:userId`}><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<User /><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Route><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Route path={match.path}><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3>Please select a user</h3><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Route><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Switch><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;</div><br/>
+              &nbsp;&nbsp;);<br/>
+            }
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Reference">
+        <header>Reference</header>
+        <article>
+          <ul>
+            <li>
+              All the documentation in this page is inspired by
+              <a
+                href="https://react.dev/learn"
+                target="_blank"
+              >React Official Documentation</a>
+            </li>
+            <li>
+              React documentation is maintained by Meta (formerly Facebook) and the open-source community
+            </li>
+            <li>
+              React was first released in 2013 and has since become one of the most popular frontend JavaScript libraries
+            </li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
